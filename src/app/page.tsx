@@ -25,6 +25,8 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import ContactForm from "@/components/ContactForm";
+import CalendlyView from "@/components/CalendlyView";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -46,38 +48,8 @@ export default function Home() {
   if (showCalendly) {
     return (
       <div className="min-h-screen bg-grid-refined pt-40 pb-20">
-        <div className="container mx-auto px-6 max-w-[1240px] text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="glass-card p-12 md:p-20 rounded-[48px] border-primary-blue/20"
-          >
-            <h1 className="text-title text-5xl md:text-7xl mb-6">Paso 2: Agenda tu diagnóstico estratégico</h1>
-            <p className="text-white/40 text-xl mb-12 max-w-2xl mx-auto font-light">
-              Hemos recibido tu información. En la sesión revisaremos tu estimación de fuga económica y validaremos si existe retorno real en tu caso.
-            </p>
-
-            <div className="bg-primary-blue/10 border border-primary-blue/20 p-6 rounded-2xl mb-12 max-w-xl mx-auto text-left flex gap-4">
-              <ShieldCheck className="w-6 h-6 text-primary-blue shrink-0" />
-              <p className="text-sm text-white/60">
-                Solo agendamos sesiones con empresas donde vemos potencial real de recuperación de margen.
-                <strong> Si reservas, asegúrate de asistir.</strong>
-              </p>
-            </div>
-
-            <div className="w-full h-[700px] rounded-3xl overflow-hidden border border-white/10 bg-white/[0.02]">
-              <iframe
-                src="https://calendly.com/mkode-pro/30min?embed_domain=mkode.es&embed_type=Inline"
-                width="100%"
-                height="100%"
-                frameBorder="0"
-              ></iframe>
-            </div>
-
-            <p className="mt-12 text-white/20 text-xs uppercase tracking-[0.2em] font-bold">
-              La sesión dura 30 minutos. Revisaremos cifras reales, no teoría.
-            </p>
-          </motion.div>
+        <div className="container mx-auto px-6 max-w-[1240px]">
+          <CalendlyView />
         </div>
       </div>
     );
@@ -283,7 +255,7 @@ export default function Home() {
                 <h3 className="text-3xl font-bold text-white mb-4">Paso 1: Cualificación</h3>
                 <p className="text-white/30 text-base font-light font-light italic">Información tratada bajo estricto NDA.</p>
               </div>
-              <ContactForm onComplete={() => setShowCalendly(true)} />
+              <ContactForm onSuccess={() => setShowCalendly(true)} />
             </div>
 
             <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-primary-blue/10 blur-[100px] rounded-full" />
@@ -344,95 +316,3 @@ function InversionPoint({ title, desc }: any) {
   );
 }
 
-function ContactForm({ onComplete }: { onComplete: () => void }) {
-  const [loading, setLoading] = useState(false);
-
-  async function handleSubmit(e: any) {
-    e.preventDefault();
-    setLoading(true);
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
-
-    try {
-      await fetch('/api/lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      onComplete();
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-8">
-      <div className="space-y-2">
-        <label className="text-[10px] font-bold uppercase tracking-[0.2em] ml-2 text-white/20">Nombre completo</label>
-        <input required name="name" placeholder="Ej: Dirección de Operaciones" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:border-primary-blue outline-none transition-all" />
-      </div>
-
-      <div className="space-y-2">
-        <label className="text-[10px] font-bold uppercase tracking-[0.2em] ml-2 text-white/20">Email corporativo</label>
-        <input required name="email" type="email" placeholder="email@empresa.com" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:border-primary-blue outline-none transition-all" />
-        <p className="text-[9px] text-white/20 ml-2 italic">Trabajamos únicamente con emails corporativos.</p>
-      </div>
-
-      <div className="space-y-2">
-        <label className="text-[10px] font-bold uppercase tracking-[0.2em] ml-2 text-white/20">Empresa</label>
-        <input required name="company" placeholder="Nombre legal o comercial" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:border-primary-blue outline-none transition-all" />
-      </div>
-
-      <div className="space-y-2">
-        <label className="text-[10px] font-bold uppercase tracking-[0.2em] ml-2 text-white/20">Facturación anual aproximada</label>
-        <select required name="revenue_range" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:border-primary-blue outline-none transition-all appearance-none text-white/50 cursor-pointer">
-          <option value="">Seleccionar rango</option>
-          <option value="0-500k">0 – 500k€</option>
-          <option value="500k-1M">500k€ – 1M€</option>
-          <option value="1M-5M">1M€ – 5M€</option>
-          <option value="5M-20M">5M€ – 20M€</option>
-          <option value="+20M">+20M€</option>
-        </select>
-      </div>
-
-      <div className="space-y-2">
-        <label className="text-[10px] font-bold uppercase tracking-[0.2em] ml-2 text-white/20">Horas semanales en tareas manuales</label>
-        <select required name="hours_manual" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:border-primary-blue outline-none transition-all appearance-none text-white/50 cursor-pointer">
-          <option value="">Seleccionar estimación</option>
-          <option value="<10h">&lt;10h</option>
-          <option value="10-30h">10 – 30h</option>
-          <option value="30-80h">30 – 80h</option>
-          <option value="+80h">+80h</option>
-          <option value="unknown">No lo tengo cuantificado</option>
-        </select>
-      </div>
-
-      <div className="space-y-2">
-        <label className="text-[10px] font-bold uppercase tracking-[0.2em] ml-2 text-white/20">Principal cuello de botella operativo</label>
-        <select required name="pain" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:border-primary-blue outline-none transition-all appearance-none text-white/50 cursor-pointer">
-          <option value="">Seleccionar problema</option>
-          <option value="data-entry">Doble entrada de datos / errores</option>
-          <option value="repetitive">Procesos manuales repetitivos</option>
-          <option value="integrations">Falta de integración de sistemas</option>
-          <option value="pipeline">Prospección / generación de pipeline</option>
-          <option value="support">Atención al cliente lenta</option>
-          <option value="reporting">Reporting y facturación</option>
-          <option value="other">Otro</option>
-        </select>
-      </div>
-
-      <button
-        disabled={loading}
-        type="submit"
-        className={cn(
-          "w-full py-5 rounded-2xl btn-primary text-white mt-10 text-xs uppercase tracking-widest",
-          loading && "opacity-50 cursor-wait"
-        )}
-      >
-        {loading ? "Procesando data..." : "Confirmar e ir al paso 2"}
-      </button>
-    </form>
-  );
-}
