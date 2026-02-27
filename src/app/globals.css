@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-dark: #011337;
+  --color-deep-black: #020208;
+  --color-primary-blue: #0A4190;
+  --color-secondary-blue: #225C98;
+  --color-light-bg: #F6F7F6;
+  --color-text-main: #F6F7F6;
+
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+
+    to {
+      height: 0;
+    }
+  }
+}
+
+:root {
+  --background: #020208;
+  --foreground: #F6F7F6;
+  --primary: #0A4190;
+  --primary-foreground: #F6F7F6;
+  --secondary: #225C98;
+  --secondary-foreground: #F6F7F6;
+  --border: rgba(255, 255, 255, 0.08);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+}
+
+.bg-page-gradient {
+  background: radial-gradient(circle at 50% 0%, #011337 0%, #020208 100%);
+  background-attachment: fixed;
+}
+
+.glass-nav {
+  background: rgba(2, 2, 8, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+  background: rgba(2, 2, 8, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.btn-gradient {
+  background: linear-gradient(135deg, #0A4190 0%, #225C98 100%);
+}
+
+.btn-gradient:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+.soft-shadow {
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+}
