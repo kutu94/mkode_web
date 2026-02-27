@@ -1,15 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-dark: #011337;
-  --color-deep-black: #020208;
   --color-primary-blue: #0A4190;
   --color-secondary-blue: #225C98;
-  --color-light-bg: #F6F7F6;
-  --color-text-main: #F6F7F6;
+  --color-deep-black: #020208;
+  --color-navy: #011337;
+  --color-light: #F6F7F6;
 
-  --radius-2xl: 1rem;
-  --radius-3xl: 1.5rem;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
 
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
@@ -39,54 +37,89 @@
   --background: #020208;
   --foreground: #F6F7F6;
   --primary: #0A4190;
-  --primary-foreground: #F6F7F6;
   --secondary: #225C98;
-  --secondary-foreground: #F6F7F6;
   --border: rgba(255, 255, 255, 0.08);
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-@layer base {
-  * {
-    border-color: var(--border);
+@layer components {
+
+  /* Apple/Linear Style Glassmorphism */
+  .glass-nav {
+    background: rgba(2, 2, 8, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .glass-card:hover {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8);
+  }
+
+  /* Linear Style Buttons */
+  .btn-primary {
+    @apply relative px-8 py-4 rounded-2xl font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300;
+    background: linear-gradient(135deg, #0A4190 0%, #225C98 100%);
+    box-shadow: 0 4px 24px -6px rgba(10, 65, 144, 0.5);
+  }
+
+  .btn-primary:hover {
+    @apply scale-[1.02] brightness-110;
+    box-shadow: 0 12px 40px -8px rgba(10, 65, 144, 0.7);
+  }
+
+  .btn-secondary {
+    @apply px-8 py-4 rounded-2xl font-bold text-xs uppercase tracking-[0.2em] border border-white/10 transition-all duration-300;
+    background: rgba(255, 255, 255, 0.01);
+  }
+
+  .btn-secondary:hover {
+    @apply bg-white/5 border-white/20;
+  }
+
+  /* Stripe style Grid Pattern */
+  .bg-grid-refined {
+    background-size: 60px 60px;
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  }
+
+  .bg-radial-hero {
+    background: radial-gradient(circle at 50% -10%, rgba(10, 65, 144, 0.15) 0%, transparent 60%);
+  }
+
+  .text-title {
+    @apply font-bold tracking-tight text-white;
+    letter-spacing: -0.04em;
   }
 }
 
-.bg-page-gradient {
-  background: radial-gradient(circle at 50% 0%, #011337 0%, #020208 100%);
-  background-attachment: fixed;
+/* Animations for scroll revelation */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.glass-nav {
-  background: rgba(2, 2, 8, 0.55);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.glass-card {
-  background: rgba(2, 2, 8, 0.65);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.btn-gradient {
-  background: linear-gradient(135deg, #0A4190 0%, #225C98 100%);
-}
-
-.btn-gradient:hover {
-  opacity: 0.95;
-  transform: translateY(-1px);
-}
-
-.soft-shadow {
-  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+.reveal-up.active {
+  opacity: 1;
+  transform: translateY(0);
 }
