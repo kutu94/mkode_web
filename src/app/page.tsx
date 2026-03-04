@@ -3,12 +3,9 @@
 import { motion } from "framer-motion";
 import {
   ArrowRight,
-  CheckCircle2,
   Settings,
   Zap,
   BrainCircuit,
-  Plus,
-  Minus,
   MessageSquare,
   Search,
   Workflow,
@@ -20,7 +17,10 @@ import {
   ShieldAlert,
   Target,
   BarChart3,
-  Calendar
+  Calendar,
+  Network,
+  Cpu,
+  Layers
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -57,7 +57,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col bg-grid-refined min-h-screen">
-      {/* 1. HERO - Focused on Economic Impact */}
+      {/* 1. HERO - Corporate Architecture Focus */}
       <section className="relative h-[90vh] flex items-center justify-center overflow-hidden bg-radial-hero border-b border-white/[0.04]">
         <div className="container mx-auto px-6 relative z-10 text-center">
           <motion.div
@@ -65,26 +65,26 @@ export default function Home() {
             animate={{ opacity: 1, scale: 1 }}
             className="inline-flex items-center gap-3 px-4 py-1.5 mb-10 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white/60 text-[10px] uppercase tracking-[0.2em]"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-primary-blue animate-pulse" />
-            Ingeniería de Recuperación de Margen
+            <span className="w-1.5 h-1.5 rounded-full bg-primary-blue" />
+            Ingeniería de Sistemas de Automatización
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] as any }}
-            className="text-title text-5xl md:text-[5.5rem] mb-10 max-w-6xl mx-auto leading-[0.9] tracking-tighter"
+            className="text-title text-5xl md:text-[5rem] mb-10 max-w-6xl mx-auto leading-[1] tracking-tighter"
           >
-            Cada semana sin automatización estás <span className="text-primary-blue">perdiendo margen.</span>
+            Infraestructura de automatización e IA para <span className="text-primary-blue">operaciones empresariales</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-            className="text-xl md:text-3xl text-white/40 mb-16 max-w-4xl mx-auto leading-tight font-light text-balance"
+            className="text-xl md:text-2xl text-white/40 mb-16 max-w-4xl mx-auto leading-relaxed font-light text-balance"
           >
-            Detectamos y recuperamos fugas económicas estructurales en 14 días. Solo si el retorno es medible y directo.
+            Diseñamos y desplegamos sistemas que eliminan trabajo manual, integran herramientas y automatizan procesos críticos.
           </motion.p>
 
           <motion.div
@@ -94,58 +94,116 @@ export default function Home() {
             className="flex flex-col items-center gap-8"
           >
             <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
-              <Link href="/contact" className="btn-primary text-center px-12 py-5 text-sm">
-                Calcular mi fuga de margen
+              <Link href="#sistemas" className="btn-primary text-center px-12 py-5 text-sm">
+                Explorar ingeniería
               </Link>
               <Link href="/cases" className="btn-secondary text-center px-12 py-5 text-sm">
-                Impacto en cifras reales
+                Ver casos
               </Link>
             </div>
-            <p className="text-[10px] uppercase tracking-[0.3em] text-white/20 font-bold flex items-center gap-2">
-              <ShieldCheck className="w-3 h-3" /> Solo 3 implementaciones disponibles este mes
-            </p>
           </motion.div>
         </div>
       </section>
 
-      {/* 2. CÓMO RECUPERAMOS MARGEN EN 14 DÍAS - Merged Section */}
+      {/* 2. PROBLEMA - Authority Focus */}
+      <section className="py-48 container mx-auto px-6 max-w-[1240px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+          <motion.div
+            initial={fadeInUp.initial}
+            whileInView={fadeInUp.whileInView}
+            viewport={fadeInUp.viewport}
+            transition={fadeInUp.transition as any}
+          >
+            <h2 className="text-title text-4xl md:text-7xl mb-12 tracking-tighter text-white leading-[1.1]">
+              Las empresas no fallan por estrategia. <br />
+              <span className="text-white/30 text-5xl">Fallan por operaciones manuales.</span>
+            </h2>
+            <div className="space-y-8 max-w-xl">
+              <p className="text-white/40 text-xl font-light leading-relaxed">
+                Procesos repetitivos, sistemas desconectados y dependencias humanas generan pérdida de margen, errores operativos y baja escalabilidad.
+              </p>
+              <p className="text-primary-blue text-xl font-medium">
+                La automatización bien diseñada elimina estas fricciones.
+              </p>
+            </div>
+          </motion.div>
+
+          <div className="grid grid-cols-2 gap-8 relative">
+            <ProblemIcon icon={<ShieldAlert className="w-5 h-5" />} text="Fricción humana" />
+            <ProblemIcon icon={<TrendingDown className="w-5 h-5" />} text="Margen perdido" />
+            <ProblemIcon icon={<MessageSquare className="w-5 h-5" />} text="Sistemas aislados" />
+            <ProblemIcon icon={<BarChart3 className="w-5 h-5" />} text="Baja escalabilidad" />
+            <div className="absolute inset-0 bg-primary-blue/5 blur-[120px] rounded-full -z-10" />
+          </div>
+        </div>
+      </section>
+
+      {/* 3. QUÉ HACE MKODE - Architecture Blocks */}
+      <section id="sistemas" className="py-48 bg-white/[0.01] border-y border-white/[0.04]">
+        <div className="container mx-auto px-6 max-w-[1240px]">
+          <motion.div
+            initial={fadeInUp.initial}
+            whileInView={fadeInUp.whileInView}
+            viewport={fadeInUp.viewport}
+            transition={fadeInUp.transition as any}
+            className="mb-32 text-center"
+          >
+            <h2 className="text-title text-4xl md:text-7xl mb-6">Arquitectura de automatización empresarial</h2>
+            <p className="text-white/30 text-xl font-light">Capacidades técnicas de alto nivel para infraestructuras modernas.</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <ArchitectureCard
+              icon={<Cpu className="w-10 h-10" />}
+              title="Automatización de procesos"
+              desc="Eliminación de tareas manuales mediante sistemas automatizados."
+              examples={["Procesamiento de datos", "Generación de documentos", "Workflows internos"]}
+            />
+            <ArchitectureCard
+              icon={<Network className="w-10 h-10" />}
+              title="Integración de ecosistemas SaaS"
+              desc="Conectamos herramientas que normalmente no se hablan entre sí."
+              examples={["CRM", "ERP", "Sistemas de facturación", "Plataformas internas"]}
+            />
+            <ArchitectureCard
+              icon={<BrainCircuit className="w-10 h-10" />}
+              title="Agentes de IA operativos"
+              desc="Implementamos sistemas inteligentes capaces de ejecutar tareas administrativas y de comunicación."
+              examples={["Agentes de atención", "Clasificación de correos", "Asistentes operativos"]}
+            />
+            <ArchitectureCard
+              icon={<Layers className="w-10 h-10" />}
+              title="Automatización comercial"
+              desc="Infraestructura para captación, seguimiento y gestión de leads."
+              examples={["Automatización B2B", "Scoring de leads", "Outreach inteligente"]}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 4. CÓMO TRABAJAMOS - Corporate Process */}
       <section className="py-48 container mx-auto px-6 max-w-[1240px]">
         <motion.div
           initial={fadeInUp.initial}
           whileInView={fadeInUp.whileInView}
           viewport={fadeInUp.viewport}
           transition={fadeInUp.transition as any}
-          className="max-w-4xl mb-32"
+          className="text-center mb-32"
         >
-          <h2 className="text-title text-4xl md:text-7xl mb-10 tracking-tighter text-white">Cómo recuperamos margen en 14 días</h2>
-          <p className="text-white/40 text-xl font-light max-w-2xl leading-relaxed">
-            Eliminamos la ineficiencia estructural mediante ingeniería de procesos aplicada, con foco exclusivo en el retorno de inversión.
-          </p>
+          <h2 className="text-title text-4xl md:text-7xl mb-6">Ingeniería de ciclo completo</h2>
+          <p className="text-white/30 text-xl font-light">Un método riguroso para resultados predecibles.</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          <ProcessCard
-            num="01"
-            title="Diagnóstico económico"
-            desc="Cuantificamos las horas manuales y el capital quemado en procesos repetitivos. Sin datos, no hay proyecto."
-            icon={<BarChart3 className="w-10 h-10 text-primary-blue opacity-40 group-hover:opacity-100 transition-opacity" />}
-          />
-          <ProcessCard
-            num="02"
-            title="Arquitectura de recuperación"
-            desc="Sistemas e IA diseñados para sustituir la carga administrativa manual por ejecución técnica inmediata."
-            icon={<Workflow className="w-10 h-10 text-primary-blue opacity-40 group-hover:opacity-100 transition-opacity" />}
-          />
-          <ProcessCard
-            num="03"
-            title="Validación con métricas"
-            desc="Medición del impacto financiero en producción. Garantizamos que el sistema genera más margen del que costó."
-            icon={<Target className="w-10 h-10 text-primary-blue opacity-40 group-hover:opacity-100 transition-opacity" />}
-          />
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 relative">
+          <div className="absolute top-[28px] left-[10%] w-[80%] h-px bg-white/5 hidden md:block" />
+          <CorporateStep num="01" title="Diagnóstico" desc="Análisis técnico de flujos y detección de cuellos de botella." />
+          <CorporateStep num="02" title="Arquitectura" desc="Diseño de la infraestructura y selección del stack óptimo." />
+          <CorporateStep num="03" title="Implementación" desc="Despliegue de sistemas sin interrupción operativa." />
+          <CorporateStep num="04" title="Optimización" desc="Refinamiento basado en métricas de rendimiento real." />
         </div>
       </section>
 
-      {/* 3. CASOS - Financial Focus */}
+      {/* 5. CASOS - Authority Focus */}
       <section className="py-48 bg-white/[0.01] border-y border-white/[0.04]">
         <div className="container mx-auto px-6 max-w-[1240px]">
           <div className="mb-32 flex flex-col md:flex-row md:items-end justify-between gap-10">
@@ -155,110 +213,54 @@ export default function Home() {
               viewport={fadeInUp.viewport}
               transition={fadeInUp.transition as any}
             >
-              <h2 className="text-title text-4xl md:text-7xl mb-6 text-white">Impacto financiero exacto</h2>
-              <p className="text-white/30 text-xl font-light italic">Resultados medidos en euros, no en funciones.</p>
+              <h2 className="text-title text-4xl md:text-7xl mb-6 text-white text-center md:text-left">Soluciones escalables</h2>
+              <p className="text-white/30 text-xl font-light italic">Implementado y operando en entornos reales.</p>
             </motion.div>
+            <Link href="/cases" className="text-primary-blue font-bold flex items-center gap-3 group text-[10px] uppercase tracking-[0.2em]">
+              Ver ingeniería de casos <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-            <FinancialCase
-              title="Triage de Gestión"
-              before="4h/día perdidas en clasificación manual."
-              after="+15.000€"
-              afterLabel="Ahorro est. anual"
-            />
-            <FinancialCase
-              title="Capture & Outreach"
-              before="Dependencia de prospección manual lenta."
-              after="+40.000€"
-              afterLabel="Pipeline trimestral"
-            />
-            <FinancialCase
-              title="Data Mapping Core"
-              before="5% de margen perdido por errores administrativos."
-              after="MARGEN 100%"
-              afterLabel="Precisión recuperada"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <SimpleCase title="Triage de comunicaciones" desc="Gestión inteligente y clasificación de alto volumen de entrada de datos." />
+            <SimpleCase title="Automatización B2B" desc="Infraestructura de prospección y seguimiento automatizado." />
+            <SimpleCase title="Sincronización SaaS" desc="Integración bidireccional entre ERP y sistemas propietarios." />
           </div>
         </div>
       </section>
 
-      {/* 4. INVERSIÓN ESTRATÉGICA */}
-      <section className="py-48 container mx-auto px-6 max-w-[1240px] text-center">
-        <motion.div
-          initial={fadeInUp.initial}
-          whileInView={fadeInUp.whileInView}
-          viewport={fadeInUp.viewport}
-          transition={fadeInUp.transition as any}
-          className="max-w-5xl mx-auto space-y-16"
-        >
-          <div className="space-y-6">
-            <h2 className="text-title text-4xl md:text-7xl text-white">Inversión proporcional al margen recuperado</h2>
-            <p className="text-white/30 text-xl font-light">ROI estimado en fase de diagnóstico inicial.</p>
-          </div>
+      {/* 6. CTA FINAL - Non-aggressive */}
+      <section id="auditoria" className="py-48 container mx-auto px-6 max-w-[1240px]">
+        <div className="glass-card rounded-[56px] p-12 md:p-24 relative overflow-hidden flex flex-col lg:flex-row gap-20 border-white/[0.08] shadow-2xl">
+          <div className="flex-1 relative z-10">
+            <h2 className="text-title text-5xl md:text-7xl mb-12 tracking-tight">Evaluación <br /><span className="text-primary-blue">Estratégica</span></h2>
+            <p className="text-white/40 text-xl md:text-2xl mb-14 font-light leading-relaxed">
+              Iniciamos con una sesión de diagnóstico para mapear la infraestructura actual y detectar oportunidades de automatización estructural.
+            </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
-            <InversionPoint
-              title="Sin proyectos sin retorno"
-              desc="No ejecutamos ninguna arquitectura si no detectamos un ROI claro en 2-4 meses."
-            />
-            <InversionPoint
-              title="Diagnóstico Estratégico"
-              desc="Sesión técnica para auditar procesos y cuantificar la fuga económica actual."
-            />
-            <InversionPoint
-              title="Ingeniería Aplicada"
-              desc="Sistemas robustos desplegados en 14 días. Foco en estabilidad y margen."
-            />
-          </div>
-
-          <div className="pt-12">
-            <Link href="/contact" className="btn-primary text-xl px-16 py-6 inline-flex items-center gap-4">
-              Solicitar Auditoría de ROI <ArrowRight className="w-6 h-6" />
-            </Link>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* 5. AUDITORÍA COMO FILTRO ESTRATÉGICO */}
-      <section id="auditoria" className="py-48 bg-white/[0.01] border-t border-white/[0.04]">
-        <div className="container mx-auto px-6 max-w-[1240px]">
-          <div className="glass-card rounded-[56px] p-12 md:p-24 relative overflow-hidden flex flex-col lg:flex-row gap-20 border-white/[0.1] shadow-2xl">
-            <div className="flex-1 relative z-10">
-              <h2 className="text-title text-5xl md:text-8xl mb-12 tracking-tight">Acceso Limitado <br /><span className="text-primary-blue">Diagnóstico ROI</span></h2>
-              <p className="text-white/40 text-xl md:text-2xl mb-14 font-light leading-relaxed">
-                Solo trabajamos con un número reducido de implementaciones al mes para garantizar la calidad y el plazo de 14 días.
-              </p>
-
-              <ul className="space-y-8 mb-12 text-left">
-                <li className="flex items-center gap-5 text-white/60">
-                  <div className="w-8 h-8 rounded-xl bg-primary-blue/10 flex items-center justify-center shrink-0 border border-primary-blue/20">
-                    <CheckCircle2 className="w-4 h-4 text-primary-blue" />
-                  </div>
-                  <span className="text-lg">Mapa de ineficiencias monetizadas</span>
+            <ul className="space-y-6 mb-12 text-left">
+              {[
+                "Mapa de procesos críticos",
+                "Evaluación de stack tecnológico",
+                "Hoja de ruta de implementación"
+              ].map((item, i) => (
+                <li key={i} className="flex items-center gap-5 text-white/50">
+                  <div className="w-2 h-2 rounded-full bg-primary-blue" />
+                  <span className="text-lg">{item}</span>
                 </li>
-                <li className="flex items-center gap-5 text-white/60">
-                  <div className="w-8 h-8 rounded-xl bg-primary-blue/10 flex items-center justify-center shrink-0 border border-primary-blue/20">
-                    <CheckCircle2 className="w-4 h-4 text-primary-blue" />
-                  </div>
-                  <span className="text-lg">Cálculo de retorno de inversión (ROI)</span>
-                </li>
-              </ul>
+              ))}
+            </ul>
+            <p className="text-white/20 text-xs italic font-light">
+              * Nota: Mantenemos un alto estándar de confidencialidad bajo NDA previo a cualquier análisis.
+            </p>
+          </div>
 
-              <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/5 text-sm text-white/20 italic font-light">
-                * Revisaremos cifras reales, no teoría. Si no detectamos retorno claro, no recomendaremos la implementación.
-              </div>
+          <div className="flex-1 relative z-10 glass-card p-10 md:p-14 border-white/10 rounded-[40px]">
+            <div className="mb-12 text-center lg:text-left">
+              <h3 className="text-3xl font-bold text-white mb-4">Solicitar Auditoría</h3>
+              <p className="text-white/30 text-base font-light italic">Breve cualificación previa.</p>
             </div>
-
-            <div className="flex-1 relative z-10 glass-card p-10 md:p-14 border-white/10 rounded-[40px]">
-              <div className="mb-12 text-center lg:text-left">
-                <h3 className="text-3xl font-bold text-white mb-4">Paso 1: Cualificación</h3>
-                <p className="text-white/30 text-base font-light font-light italic">Información tratada bajo estricto NDA.</p>
-              </div>
-              <ContactForm onSuccess={() => setShowCalendly(true)} />
-            </div>
-
-            <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-primary-blue/10 blur-[100px] rounded-full" />
+            <ContactForm onSuccess={() => setShowCalendly(true)} />
           </div>
         </div>
       </section>
@@ -266,53 +268,52 @@ export default function Home() {
   );
 }
 
-function ProcessCard({ num, title, desc, icon }: any) {
+function ProblemIcon({ icon, text }: any) {
   return (
-    <motion.div
-      variants={fadeInUp}
-      className="p-12 rounded-[40px] bg-white/[0.01] border border-white/[0.05] group hover:border-primary-blue/30 transition-all duration-700"
-    >
-      <div className="flex justify-between items-start mb-12">
-        <div className="text-primary-blue/20 font-bold text-6xl tracking-tighter group-hover:text-primary-blue/60 transition-colors uppercase italic">{num}</div>
-        <div className="mt-2">{icon}</div>
-      </div>
-      <h3 className="text-2xl font-bold mb-6 tracking-tight text-white uppercase tracking-wider text-sm">{title}</h3>
-      <p className="text-white/40 leading-relaxed text-base font-light">{desc}</p>
-    </motion.div>
+    <div className="p-8 rounded-3xl bg-white/[0.01] border border-white/[0.05] flex flex-col gap-6 group hover:border-primary-blue/30 transition-all duration-700">
+      <div className="text-primary-blue/40 group-hover:text-primary-blue transition-colors">{icon}</div>
+      <span className="text-xs font-bold text-white/30 uppercase tracking-[0.2em] group-hover:text-white/60 transition-colors">{text}</span>
+    </div>
   );
 }
 
-function FinancialCase({ title, before, after, afterLabel }: any) {
+function ArchitectureCard({ icon, title, desc, examples }: any) {
   return (
     <motion.div
       variants={fadeInUp}
-      className="glass-card p-12 rounded-[48px] hover:bg-white/[0.03] transition-all border-white/[0.06] group shadow-xl"
+      className="p-12 rounded-[48px] bg-white/[0.01] border border-white/[0.05] group hover:border-primary-blue/30 transition-all duration-700"
     >
-      <h4 className="text-white/30 uppercase tracking-[0.2em] text-[10px] font-bold mb-10">{title}</h4>
-      <div className="space-y-12">
-        <div>
-          <div className="text-[10px] text-white/20 uppercase tracking-[0.2em] mb-4 font-bold italic">ANTES</div>
-          <div className="text-white/40 leading-relaxed font-light">{before}</div>
-        </div>
-        <div className="pt-10 border-t border-white/5">
-          <div className="text-[10px] text-primary-blue uppercase tracking-[0.2em] mb-4 font-bold italic">DESPUÉS (Impacto)</div>
-          <div className="text-5xl md:text-6xl font-bold text-white tracking-tighter text-title">{after}</div>
-          <div className="mt-3 text-[10px] uppercase tracking-[0.2em] text-white/20 font-light">{afterLabel}</div>
-        </div>
+      <div className="text-primary-blue mb-10 group-hover:scale-110 transition-transform origin-left">{icon}</div>
+      <h3 className="text-2xl font-bold mb-6 text-white tracking-tight">{title}</h3>
+      <p className="text-white/40 leading-relaxed text-lg font-light mb-10">{desc}</p>
+      <div className="flex flex-wrap gap-3">
+        {examples.map((ex: string, i: number) => (
+          <span key={i} className="px-4 py-2 rounded-xl bg-white/5 border border-white/5 text-[10px] text-white/30 uppercase tracking-widest font-bold group-hover:border-primary-blue/10 transition-colors">
+            {ex}
+          </span>
+        ))}
       </div>
     </motion.div>
   );
 }
 
-function InversionPoint({ title, desc }: any) {
+function CorporateStep({ num, title, desc }: any) {
   return (
-    <div className="space-y-6 group">
-      <div className="w-12 h-12 rounded-xl bg-white/[0.02] border border-white/10 flex items-center justify-center text-primary-blue/40 group-hover:text-primary-blue group-hover:bg-primary-blue/10 transition-all duration-500">
-        <div className="w-2 h-2 rounded-full bg-current" />
+    <motion.div variants={fadeInUp} className="relative z-10 group">
+      <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-primary-blue font-bold mb-10 group-hover:bg-primary-blue group-hover:text-white transition-all duration-700">
+        {num}
       </div>
-      <h3 className="text-lg font-bold text-white tracking-tight uppercase tracking-wider text-xs">{title}</h3>
+      <h3 className="text-xl font-bold mb-4 text-white uppercase tracking-wider text-xs">{title}</h3>
+      <p className="text-white/30 leading-relaxed text-base font-light">{desc}</p>
+    </motion.div>
+  );
+}
+
+function SimpleCase({ title, desc }: any) {
+  return (
+    <div className="p-12 rounded-[40px] glass-card border-white/[0.05] hover:bg-white/[0.03] transition-all group">
+      <h3 className="text-xl font-bold mb-6 text-white group-hover:text-primary-blue transition-colors uppercase tracking-widest text-xs">{title}</h3>
       <p className="text-white/30 leading-relaxed font-light text-base">{desc}</p>
     </div>
   );
 }
-
