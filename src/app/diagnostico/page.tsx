@@ -67,7 +67,7 @@ export default function LandingPage() {
                         transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
                         className="text-xl md:text-2xl text-white/40 mb-16 max-w-4xl mx-auto leading-relaxed font-light text-balance"
                     >
-                        Diseñamos sistemas de automatización e inteligencia artificial que eliminan trabajo operativo y recuperan horas productivas en menos de 14 días.
+                        Diseñamos sistemas automatizados potenciados con inteligencia artificial que eliminan trabajo operativo y recuperan horas productivas en menos de 21 días.
                     </motion.p>
 
                     <motion.div
