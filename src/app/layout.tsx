@@ -23,7 +23,7 @@ export default function RootLayout({
         {/* ========================================== */}
         <Script
           strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX`}
+          src={`https://www.googletagmanager.com/gtag/js?id=G-RFZP04DZN8`}
         />
         <Script
           id="google-analytics"
@@ -33,7 +33,7 @@ export default function RootLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-XXXXXXXXXX', {
+              gtag('config', 'G-RFZP04DZN8', {
                 page_path: window.location.pathname,
               });
             `,
@@ -56,7 +56,7 @@ export default function RootLayout({
               t.src=v;s=b.getElementsByTagName(e)[0];
               s.parentNode.insertBefore(t,s)}(window, document,'script',
               'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', 'TU_PIXEL_ID');
+              fbq('init', '1975949739582122');
               fbq('track', 'PageView');
             `,
           }}
@@ -66,7 +66,7 @@ export default function RootLayout({
         {children}
         <noscript>
           <img height="1" width="1" style={{ display: 'none' }}
-            src={`https://www.facebook.com/tr?id=TU_PIXEL_ID&ev=PageView&noscript=1`}
+            src={`https://www.facebook.com/tr?id=1975949739582122&ev=PageView&noscript=1`}
           />
         </noscript>
       </body>
