@@ -5,13 +5,17 @@ export function getSupabase() {
     const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
     const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 
-    if (!supabaseUrl || !supabaseAnonKey) {
-        throw new Error('Missing Supabase environment variables')
+    if (!supabaseUrl) {
+        throw new Error('Missing NEXT_PUBLIC_SUPABASE_URL')
     }
 
-    // Usamos Service Role Key si está disponible para saltar RLS en el lado del servidor
-    // Si no, caemos en la anon key
+    // Usamos Service Role Key (Admin) si existe para ignorar RLS en el servidor.
+    // Solo usamos Anon Key como respaldo.
     const key = serviceRoleKey || supabaseAnonKey
+
+    if (!key) {
+        throw new Error('Missing Supabase Auth Key (Anon or Service Role)')
+    }
 
     return createClient(supabaseUrl, key, {
         auth: {
