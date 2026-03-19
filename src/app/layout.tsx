@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"], variable: "--font-inter" });
@@ -64,6 +65,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} font-sans antialiased bg-page-gradient min-h-screen text-white/90`} suppressHydrationWarning>
         {children}
+        <SpeedInsights />
         <noscript>
           <img height="1" width="1" style={{ display: 'none' }}
             src={`https://www.facebook.com/tr?id=1975949739582122&ev=PageView&noscript=1`}
