@@ -20,7 +20,7 @@ export async function POST(req: Request) {
         }
 
         const supabase = getSupabase()
-        const { data, error } = await supabase
+        const { error } = await supabase
             .from('leads')
             .insert([
                 {
@@ -34,7 +34,6 @@ export async function POST(req: Request) {
                     created_at: new Date().toISOString()
                 }
             ])
-            .select()
 
         if (error) {
             console.error('Supabase error:', error)
@@ -68,7 +67,7 @@ export async function POST(req: Request) {
             // No bloqueamos la respuesta exitosa si falla el email, ya que el lead sí se guardó.
         }
 
-        return NextResponse.json({ success: true, data })
+        return NextResponse.json({ success: true })
     } catch (err) {
         console.error('API error:', err)
         return NextResponse.json(
