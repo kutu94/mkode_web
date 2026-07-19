@@ -8,6 +8,9 @@ export const metadata: Metadata = {
     title: "Ejemplos de automatización | MKode",
     description: "Explore escenarios de automatización sin resultados atribuidos ni promesas comerciales.",
     url: "https://www.mkode.es/cases",
+    type: "website",
+    locale: "es_ES",
+    siteName: "MKode",
   },
 };
 
