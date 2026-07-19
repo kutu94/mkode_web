@@ -6,6 +6,15 @@ export const dynamic = "force-dynamic";
 const text = (value: unknown, maxLength: number) =>
   typeof value === "string" ? value.trim().slice(0, maxLength) : "";
 
+function buildMessage(hoursManual: string, comments: string) {
+  const sections = [
+    hoursManual ? `[Horas manuales aproximadas]\n${hoursManual}` : "",
+    comments ? `[Comentarios adicionales]\n${comments}` : "",
+  ].filter(Boolean);
+
+  return sections.join("\n\n").slice(0, 2000) || null;
+}
+
 export async function POST(req: Request) {
   try {
     const body: unknown = await req.json();
@@ -14,18 +23,19 @@ export async function POST(req: Request) {
     }
 
     const input = body as Record<string, unknown>;
+    const hoursManual = text(input.hours_manual, 160);
+    const comments = text(input.message, 1600);
     const lead = {
       name: text(input.name, 120),
       email: text(input.email, 254).toLowerCase(),
       company: text(input.company, 160),
       revenue_range: text(input.revenue_range, 60) || null,
-      hours_manual: text(input.hours_manual, 160),
       pain: text(input.pain, 500),
-      message: text(input.message, 2000) || null,
+      message: buildMessage(hoursManual, comments),
       created_at: new Date().toISOString(),
     };
 
-    if (!lead.name || !lead.email || !lead.company || !lead.hours_manual || !lead.pain) {
+    if (!lead.name || !lead.email || !lead.company || !lead.pain) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
