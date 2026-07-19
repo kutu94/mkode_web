@@ -6,11 +6,15 @@ export const dynamic = "force-dynamic";
 const text = (value: unknown, maxLength: number) =>
   typeof value === "string" ? value.trim().slice(0, maxLength) : "";
 
-function buildMessage(hoursManual: string, comments: string) {
+function buildMessage(input: Record<string, unknown>) {
   const sections = [
-    hoursManual ? `[Horas manuales aproximadas]\n${hoursManual}` : "",
-    comments ? `[Comentarios adicionales]\n${comments}` : "",
-  ].filter(Boolean);
+    ["Cargo o responsabilidad", text(input.role, 160)],
+    ["Herramientas implicadas", text(input.tools, 500)],
+    ["Horas manuales aproximadas", text(input.hours_manual, 160)],
+    ["Comentarios adicionales", text(input.message, 1200)],
+  ]
+    .filter(([, value]) => value)
+    .map(([label, value]) => `[${label}]\n${value}`);
 
   return sections.join("\n\n").slice(0, 2000) || null;
 }
@@ -23,15 +27,13 @@ export async function POST(req: Request) {
     }
 
     const input = body as Record<string, unknown>;
-    const hoursManual = text(input.hours_manual, 160);
-    const comments = text(input.message, 1600);
     const lead = {
       name: text(input.name, 120),
       email: text(input.email, 254).toLowerCase(),
       company: text(input.company, 160),
       revenue_range: text(input.revenue_range, 60) || null,
       pain: text(input.pain, 500),
-      message: buildMessage(hoursManual, comments),
+      message: buildMessage(input),
       created_at: new Date().toISOString(),
     };
 
