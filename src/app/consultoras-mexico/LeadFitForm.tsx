@@ -71,32 +71,64 @@ export default function LeadFitForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5" data-analytics-event="lead_form" data-analytics-surface="consultoras_mexico">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-5"
+      data-analytics-event="lead_form"
+      data-analytics-surface="consultoras_mexico"
+    >
       <input type="hidden" name="form_source" value="consultoras_mexico" />
       <div className="sr-only" aria-hidden="true">
         <label htmlFor="fit-website">Sitio web</label>
         <input id="fit-website" name="website" tabIndex={-1} autoComplete="off" />
       </div>
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field id="fit-name" label="Nombre"><input id="fit-name" name="name" autoComplete="name" required className={fieldClass} /></Field>
-        <Field id="fit-email" label="Email corporativo"><input id="fit-email" name="email" type="email" autoComplete="email" required className={fieldClass} /></Field>
+        <Field id="fit-name" label="Nombre">
+          <input id="fit-name" name="name" autoComplete="name" required className={fieldClass} />
+        </Field>
+        <Field id="fit-email" label="Email corporativo">
+          <input id="fit-email" name="email" type="email" autoComplete="email" required className={fieldClass} />
+        </Field>
       </div>
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field id="fit-company" label="Empresa"><input id="fit-company" name="company" autoComplete="organization" required className={fieldClass} /></Field>
-        <Field id="fit-role" label="Cargo o responsabilidad"><input id="fit-role" name="role" autoComplete="organization-title" required className={fieldClass} /></Field>
+        <Field id="fit-company" label="Empresa">
+          <input id="fit-company" name="company" autoComplete="organization" required className={fieldClass} />
+        </Field>
+        <Field id="fit-role" label="Cargo o responsabilidad">
+          <input id="fit-role" name="role" autoComplete="organization-title" required className={fieldClass} />
+        </Field>
       </div>
-      <Field id="fit-pain" label="Principal fuga o paso manual"><textarea id="fit-pain" name="pain" rows={3} required placeholder="Describa el punto del flujo que necesita revisar." className={cn(fieldClass, "resize-y")} /></Field>
-      <Field id="fit-tools" label="Herramientas implicadas (opcional)"><input id="fit-tools" name="tools" placeholder="Por ejemplo: correo, CRM, hojas de cálculo o calendario." className={fieldClass} /></Field>
-      <Field id="fit-hours" label="Horas aproximadas dedicadas al proceso (opcional)"><input id="fit-hours" name="hours_manual" className={fieldClass} /></Field>
-      <Field id="fit-message" label="Comentarios adicionales (opcional)"><textarea id="fit-message" name="message" rows={3} className={cn(fieldClass, "resize-y")} /></Field>
+      <Field id="fit-pain" label="Principal fuga o paso manual">
+        <textarea
+          id="fit-pain"
+          name="pain"
+          rows={3}
+          required
+          placeholder="Describa el punto del flujo que necesita revisar."
+          className={cn(fieldClass, "resize-y")}
+        />
+      </Field>
+      <Field id="fit-tools" label="Herramientas implicadas (opcional)">
+        <input
+          id="fit-tools"
+          name="tools"
+          placeholder="Por ejemplo: correo, CRM, hojas de cálculo o calendario."
+          className={fieldClass}
+        />
+      </Field>
+      <Field id="fit-hours" label="Horas aproximadas dedicadas al proceso (opcional)">
+        <input id="fit-hours" name="hours_manual" className={fieldClass} />
+      </Field>
+      <Field id="fit-message" label="Comentarios adicionales (opcional)">
+        <textarea id="fit-message" name="message" rows={3} className={cn(fieldClass, "resize-y")} />
+      </Field>
 
-      <p className="text-xs leading-relaxed text-white/70">MKode utilizará estos datos para analizar y responder su solicitud. Consulte nuestro <Link href="/privacidad" className="rounded-sm text-blue-300 underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300">aviso de privacidad</Link>.</p>
-      {status === "error" && <p className="rounded-xl border border-red-400/30 bg-red-400/10 p-4 text-sm text-red-100" role="alert">No pudimos enviar la solicitud. Inténtelo nuevamente o escriba a marcos.quintana@mkode.es.</p>}
-      <button type="submit" disabled={status === "loading"} data-analytics-event="fit_review_submit" className={cn("w-full rounded-2xl px-5 py-5 text-xs font-bold uppercase tracking-[0.16em] text-white btn-gradient soft-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300", status === "loading" && "cursor-wait opacity-70")}>{status === "loading" ? "Enviando..." : "Solicitar revisión de encaje"}</button>
-    </form>
-  );
-}
-
-function Field({ id, label, children }: { id: string; label: string; children: ReactNode }) {
-  return <div className="space-y-2"><label htmlFor={id} className="text-[11px] font-bold uppercase tracking-[0.14em] text-white/75">{label}</label>{children}</div>;
-}
+      <div className="rounded-2xl border border-white/15 bg-white/5 p-5 text-xs leading-relaxed text-white/70">
+        <p className="font-semibold text-white">Información básica de privacidad</p>
+        <p className="mt-2">
+          Responsable: MKode LLC. Trataremos sus datos de identificación y contacto, empresa y cargo, y la
+          información sobre el proceso, herramientas, horas y comentarios que facilite únicamente para evaluar el
+          encaje, atender su solicitud y contactar con usted en relación con ella.
+        </p>
+        <p className="mt-2">
+          Consulte el{
