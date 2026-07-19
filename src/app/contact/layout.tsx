@@ -8,6 +8,9 @@ export const metadata: Metadata = {
     title: "Revisión de encaje | MKode",
     description: "Revise con MKode un proceso operativo y sus oportunidades de automatización.",
     url: "https://www.mkode.es/contact",
+    type: "website",
+    locale: "es_ES",
+    siteName: "MKode",
   },
 };
 
