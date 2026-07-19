@@ -38,6 +38,7 @@ export async function POST(req: Request) {
     }
 
     const role = text(input.role, 160);
+    const requiresRole = text(input.form_source, 80) === "consultoras_mexico";
     const lead = {
       name: text(input.name, 120),
       email: text(input.email, 254).toLowerCase(),
@@ -48,7 +49,7 @@ export async function POST(req: Request) {
       created_at: new Date().toISOString(),
     };
 
-    if (!lead.name || !lead.email || !lead.company || !role || !lead.pain) {
+    if (!lead.name || !lead.email || !lead.company || !lead.pain || (requiresRole && !role)) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
