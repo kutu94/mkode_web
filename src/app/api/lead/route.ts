@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getSupabase } from "@/lib/supabase";
 
 export const dynamic = "force-dynamic";
+const MAX_BODY_BYTES = 16 * 1024;
 
 const text = (value: unknown, maxLength: number) =>
   typeof value === "string" ? value.trim().slice(0, maxLength) : "";
@@ -21,12 +22,22 @@ function buildMessage(input: Record<string, unknown>) {
 
 export async function POST(req: Request) {
   try {
+    const declaredLength = Number(req.headers.get("content-length") ?? 0);
+    if (Number.isFinite(declaredLength) && declaredLength > MAX_BODY_BYTES) {
+      return NextResponse.json({ error: "Request body too large" }, { status: 413 });
+    }
+
     const body: unknown = await req.json();
     if (!body || typeof body !== "object" || Array.isArray(body)) {
       return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
     }
 
     const input = body as Record<string, unknown>;
+    if (text(input.website, 200)) {
+      return NextResponse.json({ success: true }, { status: 200 });
+    }
+
+    const role = text(input.role, 160);
     const lead = {
       name: text(input.name, 120),
       email: text(input.email, 254).toLowerCase(),
@@ -37,7 +48,7 @@ export async function POST(req: Request) {
       created_at: new Date().toISOString(),
     };
 
-    if (!lead.name || !lead.email || !lead.company || !lead.pain) {
+    if (!lead.name || !lead.email || !lead.company || !role || !lead.pain) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
